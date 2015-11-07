@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 #include "course.h"
 
 using namespace std;
@@ -14,6 +15,19 @@ int main(){
 
     cout<<"Enter command number: "<<endl;
     while(cin>>command){
+        try{
+            if(command<0 || command>5)
+                throw runtime_error("The command must between 0 to 5");
+        }
+        catch (runtime_error err){
+            cout <<err.what()<<"\nTry Again? Enter y or n"<<endl;
+            char c;
+            cin >> c;
+            if(!cin || c == 'n')
+                break;
+            else
+                cout<<"Enter command number: "<<endl;
+        }
         switch(command){
             case 0:
                 for(string i:helpDoc())
